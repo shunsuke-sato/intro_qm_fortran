@@ -1,4 +1,4 @@
-n<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -30,7 +30,8 @@ n<!DOCTYPE html>
       <section>
         <h2>Lesson 0-1: compilation and execution</h2>
 	<p>First, we learn a basic procedure to run Fortran programs on a computer. To run a program, one often follow the following procedure: (i) write a Fortran code in <code>.f90</code> format. (ii) Compile the fortran code and create an executable file. (iii) Run the execurable file to obtain results.</p>
-	<p>To learn this basic procedure, we try to run "Hello world" program, which is a traditional program to learn the programing language (see e.g. <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">Wikipedia</a>). As the first step, we write the following Fortran code with your favolit editor and save it as <code>lesson0_1.f90</code>.</p>
+	<p>To learn this basic procedure, we try to run "Hello world" program, which is a traditional program to learn the programing language (see e.g. <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">Wikipedia</a>).</p>
+	<p>(i): As the first step, we write the following Fortran code with your favolit editor and save it as <code>lesson0_1.f90</code>.</p>
 	(<a href="src/lesson0_1.f90" download>lesson0_1.f90</a>)
 <pre><code>program main
 	    
@@ -41,16 +42,34 @@ end program main</code></pre>
 	  The first line <code>program main</code> indicates the start of the program block and it ends by <code>end program main</code>. Here, <code>main</code> is the name of the program, and this name can be any name. For simplicity, here we use <code>main</code>. The second line <code>write(*,*)"Hello world!!"</code> means that the program writes "Hello world!!". The <code>write</code> sentence is often used to output results of programs, as will be shown later.n
 	</p>
 	<p>
-	  Once the above Fortran code (<code>lesson0_1.f90</code>) is prepared, we then compile the code to provide an executable file. You can compile the program by typing the following commands on your terminal:
+	  (ii): Once the above Fortran code (<code>lesson0_1.f90</code>) is prepared, we then compile the code to provide an executable file. You can compile the program by typing the following commands on your terminal:
 	</p>
-	<code>gfortran lesson0_1.f90 -o hello</code>
+	<pre><code>gfortran lesson0_1.f90 -o hello</code></pre>
 	<p>
-	  Here, we used <code>gfortran</code> compiler, which is one of the most popular Fortran compiler, but you can use your favorite compiler instead. By typing the above commnds, the Fortran source file (<code>lesson0_1.f90</code>) is compiled, and the executable file (<code>hello</code>) is generated. Here, the name of the executable file is defined with <code>-o</code> xoption. You can change the names of the source code and the executable file as you like.
+	  Here, we used <code>gfortran</code> compiler, which is one of the most popular Fortran compilers, but you can use your favorite compiler instead. By typing the above commnds, the Fortran source file (<code>lesson0_1.f90</code>) is compiled, and the executable file (<code>hello</code>) is generated. Here, the name of the executable file is defined with <code>-o</code> option. You can change the names of the source code and the executable file as you like.
 	</p>
-	
+	<p>
+	  (iii): Once the above executable file (<code>hello</code>) is prepared, we can run the program by typing the following command on your terminatl:
+	</p>
+	<pre><code>./hello</code></pre>
+	<p>
+	  As an out of the program, you will see the following message:
+	</p>
+	<pre><code>Hello World!!</code></pre>
+	<p>
+	  This output is provided by the line <code>write(*,*)"Hello world!!"</code> in <a href="src/lesson0_1.f90" download>lesson0_1.f90</a>.
+	</p>
+	<p>
+	  Here, we learn the basic procedure to run a Fortran program: (i) write a Fortran code in <code>.f90</code> format. (ii) Compile the fortran code and create an executable file. (iii) Run the execurable file to obtain results. This procedure is common for general Fortran programing, and we simply repeat it in different examples.
+	</p>
       </section>
-
-
+      <hr>
+      <section>
+        <h2>Lesson 0-2: baisic computing operations</h2>
+	<p>Next we learn how to perform basic mathematical operations such as addition, subtraction, multiplication, division as well as exponent.
+	</p>
+      </section>
+      <hr>
     </main>
 
     <footer>
