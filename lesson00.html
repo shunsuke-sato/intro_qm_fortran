@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+n<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -28,19 +28,26 @@
         <p>Here, we get familiearized with Fortran programing.</p>
       <hr>
       <section>
-        <h2>Lesson 0-1: compilation execution</h2>
-	<p>First, we learn a basic procedure to run Fortran programs on a computer. </p>
+        <h2>Lesson 0-1: compilation and execution</h2>
+	<p>First, we learn a basic procedure to run Fortran programs on a computer. To run a program, one often follow the following procedure: (i) write a Fortran code in <code>.f90</code> format. (ii) Compile the fortran code and create an executable file. (iii) Run the execurable file to obtain results.</p>
+	<p>To learn this basic procedure, we try to run "Hello world" program, which is a traditional program to learn the programing language (see e.g. <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">Wikipedia</a>). As the first step, we write the following Fortran code with your favolit editor and save it as <code>lesson0_1.f90</code>.</p>
+	(<a href="src/lesson0_1.f90" download>lesson0_1.f90</a>)
 <pre><code>program main
 	    
   write(*,*)"Hello world!!"
 
 end program main</code></pre>
+	<p>
+	  The first line <code>program main</code> indicates the start of the program block and it ends by <code>end program main</code>. Here, <code>main</code> is the name of the program, and this name can be any name. For simplicity, here we use <code>main</code>. The second line <code>write(*,*)"Hello world!!"</code> means that the program writes "Hello world!!". The <code>write</code> sentence is often used to output results of programs, as will be shown later.n
+	</p>
+	<p>
+	  Once the above Fortran code (<code>lesson0_1.f90</code>) is prepared, we then compile the code to provide an executable file. You can compile the program by typing the following commands on your terminal:
+	</p>
+	<code>gfortran lesson0_1.f90 -o hello</code>
+	<p>
+	  Here, we used <code>gfortran</code> compiler, which is one of the most popular Fortran compiler, but you can use your favorite compiler instead. By typing the above commnds, the Fortran source file (<code>lesson0_1.f90</code>) is compiled, and the executable file (<code>hello</code>) is generated. Here, the name of the executable file is defined with <code>-o</code> xoption. You can change the names of the source code and the executable file as you like.
+	</p>
 	
-<p>
-  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-  \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
-</p>
-
       </section>
 
 
