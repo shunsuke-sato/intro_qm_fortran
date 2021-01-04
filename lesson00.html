@@ -66,10 +66,114 @@ end program main</code></pre>
       <hr>
       <section>
         <h2>Lesson 0-2: baisic computing operations</h2>
-	<p>Next we learn how to perform basic mathematical operations such as addition, subtraction, multiplication, division as well as exponent.
+	<p>Next we learn how to perform basic mathematical operations such as addition, subtraction, multiplication, division as well as exponent. Let's have a look at the following example code.
+	</p>
+	(<a href="src/lesson0_2.f90" download>lesson0_2.f90</a>)
+<pre><code>program main
+  implicit none
+  real(8) :: a,b,c,d,e,f,g
+
+  a = 2.0d0
+  b = 3.0d0
+
+  write(*,*)"a=",a
+  write(*,*)"b=",b
+
+  c = a + b
+  d = a - b
+  e = a * b
+  f = a / b
+  g = a**b
+
+  write(*,*)"a+b =",c
+  write(*,*)"a-b =",d
+  write(*,*)"a*b =",e
+  write(*,*)"a/b =",f
+  write(*,*)"a**b=",g
+
+end program main</code></pre>
+	<p>This program simply performs the summation, subtraction, multiplication, devision as well as exponent. As explained above, this program also started with the <code>program</code> statement and ended the <code>end program</code> statement.</p>
+	<p>Just below the program statement, one sees <code>implicit none</code> statement. This statement deactivates "implicit variable declaration", meaning one should explicitly declere/define all the variables used in the code. The statement, <code>implicit none</code>, is very useful to find bugs in the code. Thus, I strongly recommend to add it to all scientific codes when you start writing.</p>
+	<p>
+	  Below the <code>implicit none</code> statement, we declere/define variables as
+	  <pre><code>real(8) :: a,b,c,d,e,f,g</code></pre>
+	  Here, a type of declered variables is given by <code>real(8)</code>, and it means real numbers with double precision, which is a real number with roughly 16 digits precision. In the above statement, the seven variables, <code>a,b,c,d,e,f,g</code>, are decleared as <code>real(8)</code> variables. One can use other kinds of types of variables. For example, <code>integer</code> is a type for integers, and <code>complex(8)</code> is a type for complex numbers with double precision. We will see those kinds of types in the later lessons.
+	</p>
+	<p>
+	  After the variable declaration, one sees the following components:
+	  <pre><code>a = 2.0d0
+b = 3.0d0</code></pre>
+Here, <code>2.0d0</code> means a value, \(2.0\times 10^0\), with a type of double precision real number. If you want to use a value \(3.9\times 10^2\), you can write as <code>3.9d2</code>. In the above block, the real values, \(2.0\times 10^0\) and \(3.0\times 10^0\), are substituted to the variables, <code>a</code> and <code>b</code>, respectively. So, by the above block, now the real numbers are stored in each variable. In Fortran, the symbol (<code>=</code>) does not mean the equality, but it rather means the substitution.
+	</p>
+	<p>
+	  After the variable substituion, we output the data of the variables for the check by the following block:<pre><code>write(*,*)"a=",a
+write(*,*)"b=",b</code></pre>
+	  Here, we use the <code>write</code> statement, which is explained in Lesson 0-1. In contrast to the Hello World program, here we output both "characters" and "real numbers". In Fortran, one can express "character" by using the double quotation. For example, one can express the characters of <code>a=</code> by <code>"a="</code>. Indeed, this expression has been used in the Hello World program as <code>"Hello world!!"</code>, and we obtained the output of <code>Hello world!!</code> without the double quotation. In the above block, we also try to output the <code>real(8)</code> variables, <code>a</code> and <code>b</code>, in addition to the characters. We will see how the output looks like in the following section.</p>
+	<p>Then, we move to the actual computation with the following block
+	  <pre><code>c = a + b
+d = a - b
+e = a * b
+f = a / b
+g = a**b</code></pre>
+	  Here, we perform the basic mathematical operations for the variables, <code>a</code> and <code>b</code> and substitute the results into each variable. In Fortran, the <code>+</code> symbol means the addition, the <code>-</code> symbol means the subtraction, the <code>*</code> symbol means the multiplication, the <code>/</code> symbol means the division, and the <code>**</code> symbol means exponent. After the operation, we output the results with the <code>write</code> statements.
+	</p>
+	<p>Then, let's compile and run the above code. For the compilation, one may use the following line on the terminal:</p>
+	<pre><code>gfortran lesson0_2.f90 -o lesson0_2</code></pre>
+	and run the executable file as
+	<pre><code>./lesson0_2</code></pre>	
+	As a result, you may find the following output or something similar on your display:
+	<pre><code>a=   2.0000000000000000
+b=   3.0000000000000000
+a+b =   5.0000000000000000
+a-b =  -1.0000000000000000
+a*b =   6.0000000000000000
+a/b =  0.66666666666666663
+a**b=   8.0000000000000000</code></pre>
+<p>Are the aunswers what you expected? Also, you can modify the input variables, <code>a</code> and <code>b</code>, and check the results!</p>
+	      </section>
+      <hr>
+      <section>
+        <h2>Lesson 0-3: Do loop</h2>
+	<p>Fortran has a useful function to repeat a similar procedure. This can be done by <code>do</code> loop. In this section, we learn how to use the <code>do</code> loop. Here, as a practice problem, we consider a summation of consecutive integers from \(1\) to \(n\), and one can easily find the answer as
+	  \[ S=1+2+3+\cdots+n = \frac{1}{2}n(n+1). \]
+	  Here, we numerically check the summation by using the <code>do</code> loop. Let's have a look at the following example code.
+	</p>
+	(<a href="src/lesson0_3.f90" download>lesson0_3.f90</a>)	
+	<pre><code>program main
+  implicit none
+  integer :: i, n, sum
+
+  n = 10
+  sum = 0
+  do i = 1, n
+     sum = sum + i
+  end do
+
+  write(*,*)"calculated sum =",sum
+  write(*,*)"expected   sum =",n*(n+1)/2
+  
+end program main</code></pre>
+	<p>
+	  In the above code, we first define integer variables, <code>i, n, sum</code>, as
+	  <pre><code>integer :: i, n, sum</code></pre>
+	  Then, we set the maximum integer for the summation. In the above code, we set <code>n</code> to <code>10</code>. Furthermore, we initialize the valiable <code>sum</code> by <code>sum = 0</code>. Note that, after the declaration of variables, some random numbers may be stored in the variables. Thus, one needs to properly initialize the variables if needed.
+	</p>
+	<p>
+	  Then, we move to the <code>do</code> block. The <code>do</code> loop blocks start with <code>do</code> statement and end with <code>end do</code> statement. The <code>do</code> loop repearts the contents in the <code>do</code> block. As shown in the above code, the <code>do</code> statement is often provided with the conditions for a loop counter as:
+	  <pre><code>do i = 1, n</code></pre>
+	  Here, <code>i</code> is an integer variable, and it is used as a loop counter, which controls the loop iteration. On this line, the loop counter <code>i</code> is initially set to <code>1</code>. The <code>do</code> loop iteratively performs the lines between <code>do</code> statement and <code>end do</code> statemetn, and the loop counter <code>i</code> increases by <code>1</code> at each iteration (<code>i=i+1</code>). In the above code, the iterative procedure continues until the loop counter <code>i</code> reaches to <code>n</code>. After finalizing the <code>do</code> loop, the program further performs the lines below the <code>end do</code> statement.
+	</p>
+	<p>
+	  Let's compile and run the above code (<a href="src/lesson0_3.f90" download>lesson0_3.f90</a>). You would obtain the following output:
+	</p>
+	<pre><code> calculated sum =          55
+ expected   sum =          55</code></pre>
+	<p>
+	  Here, the above value is computed with the program as a summation from <code>1</code> to <code>10</code>, wihle the bottom value is evaluated with the analytic expression. So, we can confirm that the program properly sum up the integers from 1 to 10.
 	</p>
       </section>
       <hr>
+      [<a href="index.html">Back to Home</a>]
     </main>
 
     <footer>
