@@ -47,10 +47,51 @@
 	  Remarkabely, the error of the finite defference formula, Eq. (\(5\)), is propotional to \(h^2\). Hence, the finite difference formula in Eq. (\(5\)) can be more accurate than Eq. (\(1\)) since the error of Eq. (\(5\)) is rapidly converged to zero. The finite difference formula in Eq. (\(1\)) is called <i>forward finite difference</i> while the fomula in Eq. (\(5\)) is callsed <i>central finite difference</i>.
 	</p>
 	<p>
-	  In this section, we learn the numerical derivative with the forward finite difference and central finite difference. As a practive example, we consider the derivative of the exponetional function \(f(x)=e^x\).
+	  In this section, we learn the numerical derivative with the forward finite difference and central finite difference. As a practive example, we consider the derivative of the exponetional function \(f(x)=e^x\) at \( x=0 \). In the following code, we compute the derivative, \( f'(0) \), by changing the finite difference, \(h\), and evaluate the error of the finite difference method. Here, the error is defined as the absolute value of the derivation of the numerical derivative from the exact value, \( Error = \left|f'_{numerical}(0)-f'_{exact}(0) \right| \).
+	</p>
+	(<a href="src/lesson0_3.f90" download>lesson1_1.f90</a>)	
+	<pre><code>program main
+  implicit none
+  integer :: i, n
+  real(8) :: ff_0, ff_p, ff_m, dfdx_f, dfdx_m, dfdx_e
+  real(8) :: x, h
+
+  x = 0d0
+  dfdx_e = exp(x)
+  
+  h = 1d0
+  
+  n = 16
+  open(20,file="fd_error.out")
+  do i = 1, n
+     ff_0   = exp(x)
+     ff_p = exp(x+h)
+     ff_m = exp(x-h)
+
+     dfdx_f = (ff_p-ff_0)/h
+     dfdx_m = (ff_p-ff_m)/(2d0*h)
+
+     write(20,"(5e16.6e3)")h,dfdx_f,abs(dfdx_f - dfdx_e),dfdx_m,abs(dfdx_m - dfdx_e)
+     
+     h = h/2d0
+  end do
+  close(20)
+
+  
+end program main</code></pre>
+	<p>
+	  In the above program, we compute the derivative at \(x=0\). Hence, the valuable <code>x</code> is prepared as <code>x=0</code>. Then, we compute the exact value of the derivative as <code>dfdx_e = exp(x)</code>.
+	</p>
+	<p>
+	  To output the results into a file, we open the file with <code>open</code>. Here, we use the following line:
+	  <pre><code>open(20,file="fd_error.out")</code></pre>
+	  Here, <code>20</code> indicates the unit number, and you can use any natural number here. With <code>file="fd_error.out"</code>, we open a file whose name is <code>fd_error.out</code>. So, in the above statement, the file <code>fd_error.out</code> is opened, and it is assigned to the unit number of <code>20</code>.
+	</p>
+	<p>
+	  After the <code>open</code> statement, we start the <code>do</code> loop in which we repeat the computation of the numerical derivative by changing the finite defference spacing \(h\).
 	</p>
 	
-	
+	<img src="src/fd_error.png" alt="Figure: Error of finite difference methods" title="Error of finite difference methods">	
       </section>
       <hr>
       [<a href="index.html">Back to Home</a>]
