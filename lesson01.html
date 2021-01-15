@@ -88,7 +88,15 @@ end program main</code></pre>
 	  Here, <code>20</code> indicates the unit number, and you can use any natural number here. With <code>file="fd_error.out"</code>, we open a file whose name is <code>fd_error.out</code>. So, in the above statement, the file <code>fd_error.out</code> is opened, and it is assigned to the unit number of <code>20</code>.
 	</p>
 	<p>
-	  After the <code>open</code> statement, we start the <code>do</code> loop in which we repeat the computation of the numerical derivative by changing the finite defference spacing \(h\).
+	  After the <code>open</code> statement, we start the <code>do</code> loop in which we repeat the computation of the numerical derivative by changing the finite defference spacing \(h\). First, we evaluate the functions, \( \exp(x) \), \( \exp(x+h) \) and \( \exp(x-h) \) as <code>ff_0</code>, <code>ff_p</code> and <code>ff_m</code>, respectively. Then, we evaluate the derivative of the function with the forward finite difference, Eq. (\(1\)), as <code>dfdx_f</code>. We also evaluate the derivative with the central finite difference, Eq. (\(5\)), as <code>dfdx_f</code>.
+	</p>
+	<p>
+	  Finally, we output the results by the <code>write</code> statement:
+	  <pre><code>write(20,"(5e16.6e3)")h,dfdx_f,abs(dfdx_f - dfdx_e),dfdx_m,abs(dfdx_m - dfdx_e)</code></pre>
+	  Here, the <code>write</code> statement writes the results into the file of <code>fd_error.out</code>, which is assigned to the unit number of <code>20</code>. In the <code>write</code> statement, the output format is defiend after the unit number as <code>"5e16.6e3"</code>. Here, the first number <code>5</code> means to output five varioubles. After that <code>e</code> means to use the exponent format. Then, <code>16.6</code> means that the width of each variable is set to <code>16</code> digits and <code>6</code> digits is used to output the significant digits. You can see the actual outout results after executing this program later.
+	</p>
+	<p>
+	  At the end of the <code>do</code> loop, the spacing <code>h</code> for the finite difference is halved, and the program repeat the above procedure with the halved spacing.
 	</p>
 	
 	<img src="src/fd_error.png" alt="Figure: Error of finite difference methods" title="Error of finite difference methods">	
